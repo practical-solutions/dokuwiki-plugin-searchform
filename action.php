@@ -9,10 +9,12 @@
 // must be run within Dokuwiki
 if(!defined('DOKU_INC')) die();
 
+require_once(DOKU_INC . 'inc/fulltext.php');
+
 /**
  * Class action_plugin_searchform
  */
-class action_plugin_searchform extends DokuWiki_Action_Plugin {
+class action_plugin_searchform2 extends DokuWiki_Action_Plugin {
 
     /**
      * Registers a callback function for a given event
@@ -91,8 +93,8 @@ class action_plugin_searchform extends DokuWiki_Action_Plugin {
 		$query = urldecode($query);
         
         # Add * to each term (excepting for namespaces) for real fulltext search
-        $terms = explode(' ',$query);
-        foreach ($terms as &$t) {
+		$terms = explode(' ',$query);
+		foreach ($terms as &$t) {
 			if (strpos($t,'*')===false && strpos($t,'@')===false) {				
 				$t="*$t*";
 				$search[] = $t;
@@ -109,12 +111,16 @@ class action_plugin_searchform extends DokuWiki_Action_Plugin {
 		echo '<div class="qfs_result_num">' . count($data) . ' ' . $this->getLang('results') . '</div>';
 
 		# display results
+		$i = Array();
+		
 		foreach ($data as $id => $counts) {
 			echo '<div class="qfs_result">';
-			echo html_wikilink(':' . $id, $name,$search).'<br><div>' ;
+			$t = html_wikilink(':' . $id, $name,$search).'<br><div>' ;
+			echo $t;
 			
-			# Could not get ft_snippet to work properly, so uses rawWiki instead
-			echo substr(strip_tags(p_render('xhtml', p_get_instructions(rawWiki($id)))),0,300);
+			# Could not get ft_snippet to work properly, so uses rawWiki instead			
+			echo substr(strip_tags(p_render('xhtml', p_get_instructions(rawWiki($id)),$i)),strlen(strip_tags($t)+2),300);			
+			
 			
 			echo '</div></div>';
 		}

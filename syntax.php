@@ -13,7 +13,7 @@ if(!defined('DOKU_INC')) die();
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_searchform extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_searchform2 extends DokuWiki_Syntax_Plugin {
 
     /**
      * Syntax Type
@@ -37,7 +37,7 @@ class syntax_plugin_searchform extends DokuWiki_Syntax_Plugin {
      * @param $mode
      */
     public function connectTo($mode) {
-        $this->Lexer->addSpecialPattern('\{searchform\b.*?\}', $mode, 'plugin_searchform');
+        $this->Lexer->addSpecialPattern('\{searchform\b.*?\}', $mode, 'plugin_searchform2');
     }
 
     /**
@@ -91,6 +91,7 @@ class syntax_plugin_searchform extends DokuWiki_Syntax_Plugin {
             $renderer->doc .= '<input type="text" ';
             if($ACT == 'search') $renderer->doc .= 'value="' . htmlspecialchars($QUERY) . '" ';
             $renderer->doc .= 'name="id" class="edit searchform__qsearch_in" placeholder="' . $this->getLang('placeholder') . '" autocomplete="off" />' . "\n";
+            $renderer->doc .= '<img id="qfs_loader" src="lib/plugins/searchform2/loader.gif">';
             $renderer->doc .= '<input type="submit" value="' . $lang['btn_search'] . '" class="button" title="' . $lang['btn_search'] . '" />' . "\n";
             $renderer->doc .= '<div class="ajax_qsearch JSpopup searchform__qsearch_out"></div>' . "\n";
             $renderer->doc .= '</div></form>' . "\n";

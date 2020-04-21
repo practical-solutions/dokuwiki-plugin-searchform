@@ -1,7 +1,7 @@
-base   searchform
-author Gerrit Uitslag, (previous: Adolfo González Blázquez)
-email  klapinklapin@gmail.com
-date   2014-07-30
-name   Search Form Plugin
-desc   Inserts a search form in any page
-url    https://www.dokuwiki.org/plugin:searchform
+base   searchform2
+author Gero Gothe (original author: Gerrit Uitslag)
+email  practical@medizin-lernen.de
+date   2020-04-21
+name   Search Form II
+desc   Fork of the original Search Form Plugin. Shows fulltext search results.
+url    https://github.com/practical-solutions/dokuwiki-plugin-searchform

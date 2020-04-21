@@ -1,8 +1,12 @@
-dokuwiki-plugin-searchform
-==========================
+# DokuWiki-Plugin: Searchform II
 
-Adds the standard search form to any page<br />
+Fork of the original [searchform-plugin](https://www.dokuwiki.org/plugin:searchform) by Gerrit Uitslag.
+
+Modifications:
+* Shows fulltext search results (thus a lot slower than the original plugin)
+* Changed the basic styling
 
 
-Original plugin by Adolfo González Blázquez (2008-10-10 last update)<br />
-Adopted by Gerrit Uitslag (2014)
+## Testing
+
+Right now working well (although quite slow) on PHP 7.3

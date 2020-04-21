@@ -64,7 +64,7 @@ jQuery.fn.dw_fullsearch = function (overrides) {
             // attach eventhandler to search field
             do_qsearch = function () {
 				
-				//document.getElementById('qfs_loader').style.visibility = 'visible'; // Gothe
+				document.getElementById('qfs_loader').style.visibility = 'visible'; // Gothe
 				
                 // abort any previous request
                 if (dw_qsearch.curRequest != null) {
@@ -93,7 +93,7 @@ jQuery.fn.dw_fullsearch = function (overrides) {
                         window.clearTimeout(dw_qsearch.timer);
                         dw_qsearch.timer = null;
                     }
-                    dw_qsearch.timer = window.setTimeout(do_qsearch, 500);
+                    dw_qsearch.timer = window.setTimeout(do_qsearch, 2000);
                 }
             );
 
@@ -115,7 +115,7 @@ jQuery.fn.dw_fullsearch = function (overrides) {
             dw_qsearch.$inObj.parents('form').removeClass('searching');
             dw_qsearch.$outObj.hide();
             dw_qsearch.$outObj.text('');
-            //document.getElementById('qfs_loader').style.visibility = 'hidden'; // Gothe
+            document.getElementById('qfs_loader').style.visibility = 'hidden'; // Gothe
         },
 
         /**
@@ -129,7 +129,7 @@ jQuery.fn.dw_fullsearch = function (overrides) {
         onCompletion: function (data) {
             var max, $links, too_big;
             
-            //document.getElementById('qfs_loader').style.visibility = 'hidden'; // Gothe
+            document.getElementById('qfs_loader').style.visibility = 'hidden'; // Gothe
             
             dw_qsearch.$inObj.parents('form').removeClass('searching');
 

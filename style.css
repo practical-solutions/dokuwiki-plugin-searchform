@@ -76,3 +76,9 @@
 	font-weight:bold;
 	color:steelblue !important;
 }
+
+#qfs_loader {
+	margin-left:-50px;
+	margin-right:17px;
+	visibility:hidden;
+}
