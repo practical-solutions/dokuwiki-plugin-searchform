@@ -93,7 +93,7 @@ jQuery.fn.dw_fullsearch = function (overrides) {
                         window.clearTimeout(dw_qsearch.timer);
                         dw_qsearch.timer = null;
                     }
-                    dw_qsearch.timer = window.setTimeout(do_qsearch, 2000);
+                    dw_qsearch.timer = window.setTimeout(do_qsearch, 1000);
                 }
             );
 

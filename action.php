@@ -89,6 +89,11 @@ class action_plugin_searchform2 extends DokuWiki_Action_Plugin {
 		$query = $INPUT->post->str('q');
 		if(empty($query)) $query = $INPUT->get->str('q');
 		if(empty($query)) return;
+        
+        if ($this->getConf('externalsearch')<>'') {
+			echo file_get_contents(($this->getConf('externalsearch')).$query);
+			return;
+		}
 
 		$query = urldecode($query);
         
