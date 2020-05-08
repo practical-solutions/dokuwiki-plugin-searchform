@@ -71,6 +71,16 @@ class action_plugin_searchform2 extends DokuWiki_Action_Plugin {
         }
     }
     
+    # Funktion zum Ausschluß von Seitennamen bei der Suche
+    function strposa($haystack, $needles=array(), $offset=0) {
+        $chr = array();
+        foreach($needles as $needle) {
+            $res = stripos($haystack, $needle, $offset);
+            if ($res !== false) $chr[$needle] = $res;
+        }
+        if(empty($chr)) return false;
+        return min($chr);
+    }
     
     # Adds the Ajax-Call "quickfullseach"
 	public function _ajax_call(Doku_Event $event, $param) {
@@ -100,7 +110,7 @@ class action_plugin_searchform2 extends DokuWiki_Action_Plugin {
         # Add * to each term (excepting for namespaces) for real fulltext search
 		$terms = explode(' ',$query);
 		foreach ($terms as &$t) {
-			if (strpos($t,'*')===false && strpos($t,'@')===false) {				
+			if (strpos($t,'*')===false && strpos($t,'@')===false) {
 				$t="*$t*";
 				$search[] = $t;
 			}
@@ -115,22 +125,56 @@ class action_plugin_searchform2 extends DokuWiki_Action_Plugin {
 		# display number of results
 		echo '<div class="qfs_result_num">' . count($data) . ' ' . $this->getLang('results') . '</div>';
 
+        
+        $result = Array();
+        foreach ($data as $id => $counts) {
+            $result[] = Array('id' => $id, 'title' => p_get_first_heading($id), 'counts' => $counts);
+        }
+
+        foreach ($terms as &$t) {$t=str_replace("*","",$t);}
+
+        # einfacher Bubble-Sort nach id und dann Titel
+        foreach (Array('id','title') as $sort) {
+            for ($i=0;$i<Count($result);$i++) {
+                for ($c=0;$c<Count($result);$c++) {
+                    if ($this->strposa($result[$i][$sort],$terms)!== false) {
+                        if ($this->strposa($result[$c][$sort],$terms)=== false) {
+                            if ($i>$c) { # Swap
+                                $temp = $result[$i];
+                                $result[$i] = $result[$c];
+                                $result[$c] = $temp;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 		# display results
 		$i = Array();
 		
-		foreach ($data as $id => $counts) {
+        for ($c=0;$c<Count($result);$c++) {
+            $id = $result[$c]['id'];
+            
+            # Extract Namespace
+            if ($this->getConf('show_namespace')==1) {
+                $n = strrpos($id,':');
+                if ($n !== false) {
+                    $ns = '<span class="qfs_namespace"> @'.substr($id,0,$n).'</span>';
+                } else $ns = '';
+            } else $ns = '';
+            
+            # Output title
 			echo '<div class="qfs_result">';
-			$t = html_wikilink(':' . $id, $name,$search).'<br><div>' ;
+			$t = html_wikilink(':' . $id, $name,$search).$ns.'<br><div>' ;
 			echo $t;
 			
 			# Could not get ft_snippet to work properly, so uses rawWiki instead			
-			echo substr(strip_tags(p_render('xhtml', p_get_instructions(rawWiki($id)),$i)),strlen(strip_tags($t)+2),300);			
-			
-			
+			echo substr(strip_tags(p_render('xhtml', p_get_instructions(rawWiki($id)),$i)),strlen(strip_tags($t)+2),300);
+            
 			echo '</div></div>';
 		}
-	
-				
+
 	}
 
 }

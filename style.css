@@ -83,6 +83,10 @@
 	visibility:hidden;
 }
 
+.qfs_namespace {
+    color:gray;
+}
+
 
 /******************************************************
     Styling external search results
