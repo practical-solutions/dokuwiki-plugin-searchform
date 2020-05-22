@@ -166,7 +166,7 @@ class action_plugin_searchform2 extends DokuWiki_Action_Plugin {
             
             # Output title
 			echo '<div class="qfs_result">';
-			$t = html_wikilink(':' . $id, $name,$search).$ns.'<br><div>' ;
+			$t = html_wikilink(':' . $id, p_get_first_heading($id),$search).$ns.'<br><div>' ;
 			echo $t;
 			
 			# Could not get ft_snippet to work properly, so uses rawWiki instead			
