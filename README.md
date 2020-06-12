@@ -1,6 +1,6 @@
 # DokuWiki-Plugin: Searchform II
 
-Fork of the original [searchform-plugin](https://www.dokuwiki.org/plugin:searchform) by Gerrit Uitslag.
+Fork of the original [searchform-plugin](https://www.dokuwiki.org/plugin:searchform) by Gerrit Uitslag. Do not install both plugins on the same DokuWiki (conflict).
 
 Modifications:
 * Shows fulltext search results (thus a lot slower than the original plugin)
