@@ -1,7 +1,7 @@
 base   searchform2
 author Gero Gothe (original author: Gerrit Uitslag)
 email  practical@medizin-lernen.de
-date   2020-05-08
+date   2020-10-01
 name   Search Form II
 desc   Fork of the original Search Form Plugin. Shows fulltext search results.
 url    https://github.com/practical-solutions/dokuwiki-plugin-searchform

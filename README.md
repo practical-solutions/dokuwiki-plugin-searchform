@@ -19,6 +19,9 @@ The searching-term the user has enterend is appended to the given url and the re
 
 **But**: Pressing enter will still direct to dokuwiki search results page showing the local results.
 
-## Testing
+## Compatbility
 
-Right now working well (although quite slow) on PHP 7.3
+Tested with
+
+  * PHP **7.3**
+  * DokuWiki/**Hogfather**
